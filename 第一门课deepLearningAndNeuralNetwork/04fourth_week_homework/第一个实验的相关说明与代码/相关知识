@@ -1,0 +1,8 @@
+reversed()：
+而reversed()是python自带的一个方法，准确说，应该是一个类；
+translate it :
+reverse（sequence） - >反转迭代器的序列值
+返回反向迭代器
+
+也就是说，在经过reversed()的作用之后，返回的是一个把序列值经过反转之后的迭代器，
+所以，需要通过遍历，或者List,或者next()等方法，获取作用后的值；

@@ -1,0 +1,84 @@
+
+
+把项目设置为Sources root
+1.  同一个文件下的py文件之间相互引用
+        from .文件名 import 方法
+    不同一个文件下的py文件之间相互引用
+        from 文件夹名字.py名字 import 方法
+
+        相对导入只有在父模块已经在当前运行环境中被导入过才有用。
+相对导入基于当前模块的名称，因为主模块总被命名为"__main__"。当我们从主模块启动时，
+Python就识图用"__main__"替换"."，于是那句话实际便成了from __main__.Wheel import Wheel，这当然是找不到的。
+
+#1.绝对导入（包名不要使用汉语）
+#2.以第三周的实验为例，把planar_utils.py与testCases.py转移到一个新模块，
+这个模块要与myDemo所在的模块目录下,并且要把你当前的文件夹 右键-》mark directory as -->mark as source root
+
+
+2.关于scipy
+    SciPy 是一个开源的 Python 算法库和数学工具包。
+    Scipy 是基于 Numpy 的科学计算库，用于数学、科学、工程学等领域，
+很多有一些高阶抽象和物理模型需要使用 Scipy。
+    SciPy 包含的模块有最优化、线性代数、积分、插值、特殊函数、快速傅里叶变换、
+信号处理和图像处理、常微分方程求解和其他科学与工程中常用的计算。
+
+3.PIL:
+    Python图像库PIL(Python Image Library)是python的第三方图像处理库，
+    但是由于其强大的功能与众多的使用人数，几乎已经被认为是python官方图像处理库了
+    https://blog.csdn.net/leemboy/article/details/83792729
+    图像归档(Image Archives)。PIL非常适合于图像归档以及图像的批处理任务。
+        你可以使用PIL创建缩略图，转换图像格式，打印图像等等。
+    图像展示(Image Display)。PIL较新的版本支持包括Tk PhotoImage，
+        BitmapImage还有Windows DIB等接口。PIL支持众多的GUI框架接口，可以用于图像展示。
+    图像处理(Image Processing)。PIL包括了基础的图像处理函数，
+        包括对点的处理，使用众多的卷积核(convolution kernels)做过滤(filter),还有颜色空间的转换。
+        PIL库同样支持图像的大小转换，图像旋转，以及任意的仿射变换。PIL还有一些直方图的方法，允许你展
+        示图像的一些统计特性。这个可以用来实现图像的自动对比度增强，还有全局的统计分析等
+    ————————————————
+4.h5py
+    快速指南：https://blog.csdn.net/jclian91/article/details/83033834
+    一个HDF5文件就是一个容器，用于储存两类对象：
+            datasets，类似于数组的数据集合；
+            groups，类似于文件夹的容器，可以储存datasets和其它groups。
+    当使用h5py时，最基本的准则为：
+            groups类似于字典（dictionaries），dataset类似于Numpy中的数组（arrays）。
+————————————————
+
+
+5.出现以下错误，需要升级h5py:     pip install --upgrade h5py
+
+        D:\Anaconda\lib\site-packages\h5py\__init__.py:36:
+        FutureWarning: Conversion of the second argument of issubdtype fromfloattonp.floatingis deprecated. In future,
+        it will be treated asnp.float64 == np.dtype(float).type. from ._conv import register_converters as _register_converters
+————————————————
+版权声明：本文为CSDN博主「一个小白的自述」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/selfimpro_001/article/details/90174633
+
+6.解决plt.imshow()不显示图像问题
+    在后面加一句：plt.show()
+    原理：plt.imshow()函数负责对图像进行处理，并显示其格式，
+    而plt.show()则是将plt.imshow()处理后的函数显示出来。
+
+7.使用np.squeeze的目的是压缩维度，只有压缩后的值才能进行解码操作
+        只有维度为1时才会去掉。
+8.assert()
+    使用assert断言是学习python一个非常好的习惯，
+    python assert 断言句语格式及用法很简单。在没完善一个程序之前，
+    我们不知道程序在哪里会出错，与其让它在运行最崩溃，
+    不如在出现错误条件时就崩溃，这时候就需要assert断言的帮助。
+    Python assert（断言）用于判断一个表达式，在表达式条件为 false 的时候触发异常。
+
+    断言可以在条件不满足程序运行的情况下直接返回错误，
+    而不必等待程序运行后出现崩溃的情况，
+    例如我们的代码只能在 Linux 系统下运行，
+    可以先判断当前系统是否符合条件。
+
+
+
+
+
+
+
+
+
+

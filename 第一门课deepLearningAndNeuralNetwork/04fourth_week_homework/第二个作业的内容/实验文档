@@ -1,0 +1,83 @@
+
+1 安装包
+
+让我们首先导入在作业过程中需要的所有软件包。
+
+记得将datrasets放入包中
+
+    numpy是Python科学计算的基本包。
+    matplotlib 是在Python中常用的绘制图形的库。
+    h5py是一个常用的包，可以处理存储为H5文件格式的数据集
+    这里最后通过PIL和 scipy用你自己的图片去测试模型效果。
+    dnn_app_utils提供了上一作业教程“逐步构建你的深度神经网络”中实现的函数。
+    np.random.seed（1）使所有随机函数调用保持一致。 这将有助于我们评估你的作业。
+
+
+2 数据集
+
+你将使用与“用神经网络思想实现Logistic回归”（作业2）中相同的“cats vs non-cats”数据集。 此前你建立的模型在对猫和非猫图像进行分类时只有70％的准确率。 希望你的新模型会更好！
+
+问题说明：你将获得一个包含以下内容的数据集（"data.h5"）：
+     - 标记为cat（1）和非cat（0）图像的训练集m_train
+     - 标记为cat或non-cat图像的测试集m_test
+     - 每个图像的维度都为（num_px，num_px，3），其中3表示3个通道（RGB）。
+
+首先通过运行以下代码来加载数据。
+
+2.2
+与往常一样，在将图像输入到网络之前，需要对图像进行重塑和标准化。
+# 2.2.1重塑  reshape
+
+# 2.2.2标准化 除以255
+
+
+
+3 模型的结构
+
+现在你已经熟悉了数据集，是时候建立一个深度神经网络来区分猫图像和非猫图像了。
+
+你将建立两个不同的模型：
+
+    2层神经网络
+    L层深度神经网络
+
+然后，你将比较这些模型的性能，并尝试不同的L值。
+
+让我们看一下两种架构。
+
+        通用步骤
+        与往常一样，你将遵循深度学习步骤来构建模型：
+            1.初始化参数/定义超参数
+            2.循环num_iterations次：
+                a. 正向传播
+                b. 计算损失函数
+                C. 反向传播
+                d. 更新参数（使用参数和反向传播的梯度）
+            4.使用训练好的参数来预测标签
+
+# 3.1 2层神经网络
+def initialize_parameters(n_x, n_h, n_y):
+    ...
+    return parameters
+def linear_activation_forward(A_prev, W, b, activation):
+    ...
+    return A, cache
+def compute_cost(AL, Y):
+    ...
+    return cost
+def linear_activation_backward(dA, cache, activation):
+    ...
+    return dA_prev, dW, db
+def update_parameters(parameters, grads, learning_rate):
+    ...
+    return parameters
+   使用a实验代码的代码
+
+
+
+
+
+
+
+
+

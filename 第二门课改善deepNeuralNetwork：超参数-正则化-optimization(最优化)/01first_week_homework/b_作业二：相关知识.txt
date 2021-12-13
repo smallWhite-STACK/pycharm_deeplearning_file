@@ -1,0 +1,55 @@
+1.print(np.int64(False))   输出值为 0
+  print(np.int64(True))    输出值为 1
+
+#上一行代码是relu激活函数的导数中出现的
+
+
+#这一周（第二本第一周第二个作业）
+我们自己写的是
+（此代码NN层数一共四层（包括输入层））
+ 这里的dZ2我可以理解
+    dA2=np.dot(W3.T,dZ3)
+    dZ2 = np.multiply(dA2, np.int64(A2 > 0))       #dA2与0或者1相乘
+    dW2 = 1./m * np.dot(dZ2, A1.T) + lambd/m * W2
+    db2 = 1./m * np.sum(dZ2, axis=1, keepdims = True)
+
+#下面的函数是在第一本书第四周第一次作业给的代码（relu的求导）
+        #这里的dZ
+def relu_backward(dA, cache):
+    Z = cache
+    #这两行代码实现上面multiply的功能
+    (这注意由于relu的导数不是1就是0，所以dZ有两个结果：等于dA或者等于0)
+    （这里的copy是为了实现修改dZ但是dA仍然不变）
+    dZ = np.array(dA, copy=True)
+    dZ[Z <= 0] = 0
+
+    assert (dZ.shape == Z.shape)
+    return dZ
+
+
+
+2.
+补充一下np.array()
+    numpy.array(object, dtype = None, copy = True, order = None, subok = False, ndmin = 0)
+
+    copy 	对象是否需要复制，可选
+    copy就是深拷贝
+
+ 关于深拷贝，浅拷贝 ，无拷贝
+ ①无拷贝a=b
+    （a变b也变）
+    a = np.arange(12) #a为一个序列
+    b = a #没有创建新的对象
+ ②view()
+   view操作，如numpy的slice，只会copy父对象，
+   不会copy底层的数据，共用原始引用指向的对象数据。
+   如果在view上修改数据，会直接反馈到原始对象。
+ ③copy
+    对对象及其子对象都进行copy一份，对新生成的对象修改删除操作不会影响到原对象。
+    这个时候d是a的复制，只是单纯的复制，两者没有一点关系：
+
+
+3.对于drop的正则化的代码说明
+    D1 = D1 < keep_prob
+    这句代码意思是将D1矩阵中大于keep_prob的改为0，小于keep_prob改为1
+    而且此时D1已经成为一个布尔矩阵（如果与数值矩阵相乘则True代表1.False代表0）

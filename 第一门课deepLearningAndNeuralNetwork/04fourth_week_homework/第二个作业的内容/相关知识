@@ -1,0 +1,50 @@
+1.
+对于2.1 的代码的说明：
+    index = 7
+    plt.imshow(train_x_orig[index])
+    print ("y = " + str(train_y[0,index]) + ". It's a " + classes[train_y[0,index]].decode("utf-8") +  " picture.")
+
+上一行代码中出现的train_y[0,index]的0：是因为python中的一维数组的索引也必须把行索引加上:
+print(train_y.shape)  #(1, 209)
+
+
+2.
+train_x_flatten =train_x_orig.reshape(12288,train_x_orig.shape[0])
+train_x_flatten = train_x_orig.reshape(train_x_orig.shape[0], -1).T
+
+#这两句代码不一样，第一行运行后cost一直降不下来
+第二行就可以，
+问题是两个的shape是一样的
+
+
+3.
+#①②不同之处就在于对W的初始化
+    ①是*0.01
+    ②是除以np.sqrt(layer_dims[l - 1])  （即除以前一层网络节点数的平方根）
+
+    #①这是我的深层网络的初始化代码
+    def initialize_parameters_deep(layer_dims):
+
+        np.random.seed(1)
+
+        parameters={}
+        L = len(layer_dims)
+        for l in range(1, L):
+            parameters['W' + str(l)] = np.random.randn(layer_dims[l], layer_dims[l - 1]) * 0.01
+            parameters['b' + str(l)] = np.zeros((layer_dims[l], 1))
+        return parameters
+
+    #②这是给的deep神经网络初始化代码
+    def initialize_parameters_deep(layer_dims):
+        np.random.seed(1)
+        parameters = {}
+        L = len(layer_dims)
+
+        for l in range(1, L):
+            parameters['W' + str(l)] = np.random.randn(layer_dims[l], layer_dims[l - 1]) / np.sqrt(layer_dims[l - 1])
+            parameters['b' + str(l)] = np.zeros((layer_dims[l], 1))
+
+            assert (parameters['W' + str(l)].shape == (layer_dims[l], layer_dims[l - 1]))
+            assert (parameters['b' + str(l)].shape == (layer_dims[l], 1))
+
+        return parameters

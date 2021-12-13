@@ -1,0 +1,104 @@
+1.  同一个文件下的py文件之间相互引用
+        from .文件名 import 方法
+    不同一个文件下的py文件之间相互引用
+        from 文件夹名字.py名字 import 方法
+
+        相对导入只有在父模块已经在当前运行环境中被导入过才有用。
+相对导入基于当前模块的名称，因为主模块总被命名为"__main__"。当我们从主模块启动时，
+Python就识图用"__main__"替换"."，于是那句话实际便成了from __main__.Wheel import Wheel，这当然是找不到的。
+
+#1.绝对导入（包名不要使用汉语）
+#2.以第三周的实验为例，把planar_utils.py与testCases.py转移到一个新模块，
+这个模块要与myDemo所在的模块目录下,并且要把你当前的文件夹 右键-》mark directory as -->mark as source root
+
+
+2.关于sklearn的logistic回归   Scikit-learn
+①linear_model
+    scikit-learn 中 logistic 回归在 LogisticRegression 类中实现了二分类（binary）、
+一对多分类（one-vs-rest）及多项式 logistic 回归，并带有可选的 L1 和 L2 正则化。
+scikit-learn的逻辑回归在默认情况下使用L2正则化
+
+    LogisticRegressionCV 对 logistic 回归 的实现内置了交叉验证（cross-validation），
+可以找出最优的 C和l1_ratio参数 。newton-cg， sag， saga 和 lbfgs 在高维数据上更快，
+这是因为采用了热启动（warm-starting）。
+#关于LogisticRegerssionCV参数详述（或者看有道云笔记）
+https://blog.csdn.net/qq_41076797/article/details/102692799
+
+2.1
+LogisticRegression回归算法的基本步骤
+LogisticRegression回归模型在Sklearn.linear_model子类下，调用sklearn逻辑回归算法步骤比较简单，即：
+    (1) 导入模型。调用逻辑回归LogisticRegression()函数。
+    (2) fit()训练。调用fit(x,y)的方法来训练模型，其中x为数据的属性，y为所属类型。
+    (3) predict()预测。利用训练得到的模型对数据集进行预测，返回预测结果。
+
+
+
+3.关于numpy.random.rand  numpy.random.randn
+rand通过本函数可以返回一个或一组服从“0~1”均匀分布的随机样本值。随机样本取值范围是[0,1)，不包括1。
+randn通过本函数可以返回一个或一组服从标准正态分布的随机样本值。
+    1)当函数括号内没有参数时，则返回一个浮点数；
+    2）当函数括号内有一个参数时，则返回秩为1的数组，不能表示向量和矩阵；
+    3）当函数括号内有两个及以上参数时，则返回对应维度的数组，能表示向量或矩阵；
+    4）np.random.standard_normal（）函数与np.random.randn()类似，但是np.random.standard_normal（）
+    的输入参数为元组（tuple）.
+    5)np.random.randn()的输入通常为整数，但是如果为浮点数，则会自动直接截断转换为整数。
+
+ 标准正态分布（期望值为0标准差为1）
+
+
+4.关于np.zeros()的使用
+b1=np.zeros((n_h,1))  （内部的括号不要少了）
+
+5.在进行正向传播时报错：
+ValueError: shapes (1,4) and (2,3) not aligned: 4 (dim 1) != 2 (dim 0)
+#这是因为我在进行W2的计算时应该用W2与A1相乘才对3
+
+6.函数sigmoid与tanh的导数
+①. sigmoid
+函数：f(z) = 1 / (1 + exp( − z))
+导数：f(z)' = f(z)(1 − f(z))
+②.tanh
+函数：f(z) = tanh(z)
+导数：f(z)' = 1 − (f(z))2--》（2是平方）
+
+7.关于np.round()
+①没有参数
+有时候我们要对浮点数取整，numpy的round()函数就是这样一个工具
+注意：
+    一般该函数遵循四舍五入原则
+    但是需要特别注意的是，当整数部分以0结束时，round函数一律是向下取整：
+        例如：100.6--》100
+
+在numpy里面，还有两个函数可以对浮点数取整，
+    向上的np.ceil(),向下的floor()。这两个函数表现稳定：
+
+②有参数np.round(a,b)
+第一个参数为待操作数据，第二个为小数点后几位
+
+8.np.mean()
+mean() 函数定义：
+numpy.mean(a, axis, dtype, out，keepdims )
+
+mean()函数功能：求取均值
+经常操作的参数为axis，以m * n矩阵举例：
+    axis 不设置值，对 m*n 个数求均值，返回一个实数
+    axis = 0：压缩行，对各列求均值，返回 1* n 矩阵
+    axis =1 ：压缩列，对各行求均值，返回 m *1 矩阵
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
